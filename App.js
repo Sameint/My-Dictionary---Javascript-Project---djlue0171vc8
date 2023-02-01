@@ -16,6 +16,15 @@ btn1.addEventListener("click", () => {
         .then((response) => response.json())
         .then((data) => {
             console.log(data);
+            var oldData=localStorage.getItem('history');
+            if(oldData){
+                oldData=JSON.parse(oldData);
+                oldData.push(data);
+            }else{
+                oldData=[];
+                oldData.push(data);
+            }
+            localStorage.setItem('history',JSON.stringify(oldData));
            result.innerHTML = `
              <div class="word">
                     <h3>${inpWord}</h3>
@@ -47,7 +56,14 @@ function dele(){
     }
 }
 btn2.addEventListener('click' ,() =>{
-localStorage.getItem('word');
+    var getitem=localStorage.getItem('history');
+    if(getitem){
+        getitem=JSON.parse(getitem);
+    }else{
+        getitem=[];
+        
+  }
+console.log(getitem);
 })
 
 
