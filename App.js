@@ -49,27 +49,28 @@ function dele() {
 }
 btn2.addEventListener("click", () => {
   var inpWord = document.getElementById("inp-word").value;
-   var allDiv = "";
+  var allDiv = "";
   var old = localStorage.getItem("history");
-  old= JSON.parse(old);
+  old = JSON.parse(old);
   old.forEach((data) => {
-    allDiv = allDiv +
-      `<div class="word">
-      <h3>${inpWord}</h3>
-                </div>
+    allDiv =
+      allDiv +
+      `
+             <div class="word">
+                    <h3>${inpWord}</h3>
+            </div>
                 <div class="details">
-                    <p>${data[0]}</p>
-                    <p>/${data[0]}/</p>
+                    <p>${data[0].meanings[0].partOfSpeech}</p>
+                    <p>/${data[0].phonetic}/</p>
                 </div>
                 <p class="word-meaning">
-                   ${data.meanings}
+                   ${data[0].meanings[0].definitions[0].definition}
                 </p>
                
                 <p class="word-example">
-                    ${data || ""}
+                    ${data[0].meanings[0].definitions[0].example || ""}
                 </p> 
                 <br>  <button class="delete" onclick="dele()" style="color:red;margin-left:80%">Delete</button> `;
   });
   result.innerHTML = allDiv;
 });
-
